@@ -27,6 +27,10 @@ fn main() -> eyre::Result<()> {
     screen_grab.framerate = cli.framerate;
     record.push(screen_grab);
 
+    if let Some(audio) = cli.audio {
+        record.push(ffmpeg::AudioOutput { id: &audio });
+    }
+
     let output = cli.output.wrap_err("need path for right now")?;
     record.push(ffmpeg::FileOutput { path: &output });
 

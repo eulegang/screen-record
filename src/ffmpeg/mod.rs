@@ -11,6 +11,10 @@ pub struct FileOutput<'a> {
     pub path: &'a Path,
 }
 
+pub struct AudioOutput<'a> {
+    pub id: &'a str,
+}
+
 pub struct Record {
     args: Vec<String>,
 }
@@ -86,5 +90,16 @@ impl ToArgs for ScreenGrab {
         args.push(format!("{screen}{offset}"));
 
         args
+    }
+}
+
+impl<'a> ToArgs for AudioOutput<'a> {
+    fn args(&self) -> Vec<String> {
+        vec![
+            "-f".to_string(),
+            "pulse".to_string(),
+            "-i".to_string(),
+            self.id.to_string(),
+        ]
     }
 }

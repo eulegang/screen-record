@@ -12,4 +12,7 @@ pub struct Cli {
 
     #[clap(long)]
     pub framerate: Option<u8>,
+
+    #[clap(short, long)]
+    pub audio: Option<String>,
 }
